@@ -1,0 +1,19 @@
+# Fixture — no es un manifiesto real
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  template:
+    spec:
+      hostNetwork: true
+      containers:
+        - name: app
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+          volumeMounts:
+            - name: hostvol
+              mountPath: /host
+      volumes:
+        - name: hostvol
+          hostPath:
+            path: /etc
